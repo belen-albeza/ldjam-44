@@ -1,14 +1,11 @@
 import Phaser from 'phaser'
 
+import { TSIZE } from '../utils/constants'
+import Character from '../prefabs/character'
+
 class MainScene extends Phaser.Scene {
   constructor() {
     super({ key: 'main' })
-  }
-
-  init() {}
-
-  preload() {
-    // load assets here
   }
 
   create() {
@@ -33,6 +30,30 @@ class MainScene extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, width, height)
 
     // TODO: create collision terrain
+
+    // spawn prefabs
+    const prefabs = this.map.objects.find(x => x.name === 'prefabs')
+    this._createPrefabs(prefabs.objects)
+  }
+
+  _createPrefabs(prefabs) {
+    // objects from tiled use bottom-left corner as the origin of coordinates,
+    // so we need to account for that
+    const offsetX = TSIZE / 2
+    const offsetY = -TSIZE / 2
+
+    prefabs.forEach(prefab => {
+      const x = prefab.x + offsetX
+      const y = prefab.y + offsetY
+
+      switch (prefab.type) {
+        case 'chara':
+          this.chara = new Character(this, x, y)
+          break
+        default:
+          console.warning(`Unknown prefab of type: ${prefab.type}`)
+      }
+    })
   }
 }
 

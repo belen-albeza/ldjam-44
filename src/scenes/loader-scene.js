@@ -8,6 +8,7 @@ import FNT_RETROFONT from '../assets/images/retrofont.png'
 
 // asset paths for the game
 import IMG_TILESET from '../assets/images/tileset.png'
+import IMG_CHARA from '../assets/images/chara.png'
 import LVL_01 from '../assets/levels/level_tmp.json'
 
 class LoaderScene extends Phaser.Scene {
@@ -33,6 +34,7 @@ class LoaderScene extends Phaser.Scene {
 
     // load images and spritesheets
     this.load.image('img:tileset', IMG_TILESET)
+    this.load.image('img:chara', IMG_CHARA)
 
     // load levels
     this.load.tilemapTiledJSON('lvl:01', LVL_01)
