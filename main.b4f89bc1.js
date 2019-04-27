@@ -2610,4 +2610,3 @@ var e=arguments[3];require("./polyfills");var r=require("./const"),i=require("./
 },{"phaser":"g7IM"}],"epB2":[function(require,module,exports) {
 "use strict";var e=u(require("phaser")),t=require("./utils/constants"),a=u(require("./scenes/main-scene"));function u(e){return e&&e.__esModule?e:{default:e}}var d={type:e.default.AUTO,width:t.SCREEN_WIDTH,height:t.SCREEN_HEIGHT,scale:{min:{width:t.SCREEN_WIDTH,height:t.SCREEN_HEIGHT},mode:e.default.Scale.FIT,autoCenter:e.default.Scale.CENTER_BOTH},pixelArt:!0,zoom:3,physics:{default:"arcade",arcade:{debug:!1}},scene:[a.default]};window.onload=function(){new e.default.Game(d)};
 },{"phaser":"g7IM","./utils/constants":"jhrV","./scenes/main-scene":"xKZG"}]},{},["epB2"], null)
-//# sourceMappingURL=/main.8b4808f6.js.map
