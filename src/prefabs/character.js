@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import MeleeAttack from './melee-attack'
 
 const SPEED = 100
 
@@ -14,6 +15,18 @@ class Character extends Phaser.Physics.Arcade.Sprite {
 
     // enable collision with world boudns
     this.setCollideWorldBounds(true)
+
+    this.attackSprite = null
+  }
+
+  get isAttacking() {
+    return !!this.attackSprite
+  }
+
+  update(time, delta) {
+    if (this.attackSprite) {
+      this.attackSprite.updatePositionFromParent(this.x, this.y)
+    }
   }
 
   move(dirX, dirY) {
@@ -30,6 +43,28 @@ class Character extends Phaser.Physics.Arcade.Sprite {
     } else if (this.body.velocity.y > 0) {
       this.angle = 90
     }
+  }
+
+  attack() {
+    if (this.isAttacking) {
+      return false
+    }
+
+    const offset = Phaser.Math.Rotate(
+      new Phaser.Geom.Point(2, 0),
+      this.rotation
+    )
+
+    this.attackSprite = new MeleeAttack(
+      this.scene,
+      this.x + offset.x,
+      this.y + offset.y,
+      this.angle,
+      offset
+    )
+    this.attackSprite.once('destroy', () => (this.attackSprite = null))
+
+    return true
   }
 }
 

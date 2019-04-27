@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 
 import { TSIZE } from '../utils/constants'
 import Character from '../prefabs/character'
+import MeleeAttack from '../prefabs/melee-attack'
 
 class MainScene extends Phaser.Scene {
   constructor() {
@@ -14,8 +15,12 @@ class MainScene extends Phaser.Scene {
       left: Phaser.Input.Keyboard.KeyCodes.LEFT,
       right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
       up: Phaser.Input.Keyboard.KeyCodes.UP,
-      down: Phaser.Input.Keyboard.KeyCodes.DOWN
+      down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+      attack: Phaser.Input.Keyboard.KeyCodes.Z
     })
+
+    // setup animations
+    MeleeAttack.CreateAnimations(this)
 
     // setup the game world
     this._createLevel()
@@ -30,6 +35,7 @@ class MainScene extends Phaser.Scene {
     this.physics.collide(this.chara, layer)
 
     this._updatePlayerInput()
+    this.chara.update()
   }
 
   _updatePlayerInput() {
@@ -49,6 +55,11 @@ class MainScene extends Phaser.Scene {
     } else {
       // stop
       this.chara.move(0, 0)
+    }
+
+    // attack
+    if (Phaser.Input.Keyboard.JustDown(this.keys.attack)) {
+      this.chara.attack()
     }
   }
 
