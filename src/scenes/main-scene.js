@@ -25,6 +25,10 @@ class MainScene extends Phaser.Scene {
   }
 
   update() {
+    // collision detection
+    const layer = this.map.getLayer('main').tilemapLayer
+    this.physics.collide(this.chara, layer)
+
     this._updatePlayerInput()
   }
 
@@ -52,15 +56,15 @@ class MainScene extends Phaser.Scene {
     // create a new tilemap and attach the tileset to it
     this.map = this.make.tilemap({ key: 'lvl:01' })
     const tiles = this.map.addTilesetImage('tileset', 'img:tileset')
+    // setup map layers and their collisions
     this.map.createStaticLayer('main', tiles)
+    this.map.setCollisionByProperty({ solid: true })
 
     // update camera and world bounds so the whole map fits
     const width = this.map.widthInPixels
     const height = this.map.heightInPixels
     this.cameras.main.setBounds(0, 0, width, height)
     this.physics.world.setBounds(0, 0, width, height)
-
-    // TODO: create collision terrain
 
     // spawn prefabs
     const prefabs = this.map.objects.find(x => x.name === 'prefabs')
@@ -84,6 +88,18 @@ class MainScene extends Phaser.Scene {
         default:
           console.warning(`Unknown prefab of type: ${prefab.type}`)
       }
+    })
+  }
+
+  _drawDebug() {
+    if (!this._debugGraphics) {
+      this._debugGraphics = this.add.graphics()
+    }
+    // Pass in null for any of the style options to disable drawing that component
+    this.map.renderDebug(this._debugGraphics, {
+      tileColor: null, // Non-colliding tiles
+      collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // Colliding tiles
+      faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Colliding face edges
     })
   }
 }

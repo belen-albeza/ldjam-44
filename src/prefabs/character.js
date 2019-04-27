@@ -9,6 +9,10 @@ class Character extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this)
     scene.physics.add.existing(this)
 
+    // make the physical body (not the sprite image itself!) smaller
+    this.setSize(8, 8)
+
+    // enable collision with world boudns
     this.setCollideWorldBounds(true)
   }
 

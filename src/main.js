@@ -22,7 +22,9 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: false
+      // debug: true,
+      // debugShowBody: true,
+      // debugShowStaticBody: true
     }
   },
   scene: [LoaderScene, MainScene]
