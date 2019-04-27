@@ -9,12 +9,43 @@ class MainScene extends Phaser.Scene {
   }
 
   create() {
+    // setup keys
+    this.keys = this.input.keyboard.addKeys({
+      left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+      right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+      up: Phaser.Input.Keyboard.KeyCodes.UP,
+      down: Phaser.Input.Keyboard.KeyCodes.DOWN
+    })
+
     // setup the game world
     this._createLevel()
+
+    // make the camera follow the main character
+    this.cameras.main.startFollow(this.chara)
   }
 
   update() {
-    // update the game world
+    this._updatePlayerInput()
+  }
+
+  _updatePlayerInput() {
+    // move main character
+    if (this.keys.left.isDown) {
+      // move left
+      this.chara.move(-1, 0)
+    } else if (this.keys.right.isDown) {
+      // move right
+      this.chara.move(1, 0)
+    } else if (this.keys.up.isDown) {
+      // move up
+      this.chara.move(0, -1)
+    } else if (this.keys.down.isDown) {
+      // move down
+      this.chara.move(0, 1)
+    } else {
+      // stop
+      this.chara.move(0, 0)
+    }
   }
 
   _createLevel() {

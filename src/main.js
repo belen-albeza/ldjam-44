@@ -17,6 +17,7 @@ const config = {
     autoCenter: Phaser.Scale.CENTER_BOTH
   },
   pixelArt: true, // set to false for non-pixel games
+  roundPixels: true,
   zoom: 3, // set to 1 to keep original graphics size
   physics: {
     default: 'arcade',
