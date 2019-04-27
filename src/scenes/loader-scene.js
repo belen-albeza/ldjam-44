@@ -8,6 +8,7 @@ import FNT_RETROFONT from '../assets/images/retrofont.png'
 
 // asset paths for the game
 import IMG_TILESET from '../assets/images/tileset.png'
+import LVL_01 from '../assets/levels/level_tmp.json'
 
 class LoaderScene extends Phaser.Scene {
   constructor() {
@@ -15,15 +16,15 @@ class LoaderScene extends Phaser.Scene {
       key: 'loader',
       pack: {
         files: [
-          { type: 'image', key: 'loading-bar', url: IMG_LOADINGBAR },
-          { type: 'image', key: 'fnt:retro', url: FNT_RETROFONT }
+          { type: 'image', key: 'img:loading-bar', url: IMG_LOADINGBAR },
+          { type: 'image', key: 'img:retro', url: FNT_RETROFONT }
         ]
       }
     })
   }
 
   init() {
-    this.cameras.main.setBackgroundColor('#171c2a')
+    this.cameras.main.setBackgroundColor('#15171e')
   }
 
   preload() {
@@ -31,7 +32,10 @@ class LoaderScene extends Phaser.Scene {
     this._createLoadingBar()
 
     // load images and spritesheets
-    this.load.image('tileset', IMG_TILESET)
+    this.load.image('img:tileset', IMG_TILESET)
+
+    // load levels
+    this.load.tilemapTiledJSON('lvl:01', LVL_01)
   }
 
   create() {
@@ -41,14 +45,14 @@ class LoaderScene extends Phaser.Scene {
 
   _addBitmapFont() {
     const config = {
-      image: 'fnt:retro',
+      image: 'img:retro',
       width: 4,
       height: 6,
       chars: Phaser.GameObjects.RetroFont.TEXT_SET6
     }
 
     this.cache.bitmapFont.add(
-      'retrofont',
+      'fnt:retro',
       Phaser.GameObjects.RetroFont.Parse(this, config)
     )
   }
@@ -56,17 +60,17 @@ class LoaderScene extends Phaser.Scene {
   _createLoadingBar() {
     // make bar graphics
     this.add
-      .image(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 'loading-bar')
+      .image(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 'img:loading-bar')
       .setAlpha(0.2)
     this.bar = this.add
-      .image(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 'loading-bar')
+      .image(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 'img:loading-bar')
       .setCrop(0, 0, 0, 0)
     // add a loading label
     this.add
       .bitmapText(
         SCREEN_WIDTH / 2 - this.bar.width / 2,
         SCREEN_HEIGHT / 2 - 4,
-        'retrofont',
+        'fnt:retro',
         'LOADING...'
       )
       .setOrigin(0, 1)

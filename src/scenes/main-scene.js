@@ -12,15 +12,27 @@ class MainScene extends Phaser.Scene {
   }
 
   create() {
-    // set clear color to muted dark blue
-    this.cameras.main.setBackgroundColor('#171c2a')
-
     // setup the game world
-    this.add.bitmapText(128, 64, 'retrofont', '(GAME GOES HERE)').setOrigin(0.5)
+    this._createLevel()
   }
 
   update() {
     // update the game world
+  }
+
+  _createLevel() {
+    // create a new tilemap and attach the tileset to it
+    this.map = this.make.tilemap({ key: 'lvl:01' })
+    const tiles = this.map.addTilesetImage('tileset', 'img:tileset')
+    this.map.createStaticLayer('main', tiles)
+
+    // update camera and world bounds so the whole map fits
+    const width = this.map.widthInPixels
+    const height = this.map.heightInPixels
+    this.cameras.main.setBounds(0, 0, width, height)
+    this.physics.world.setBounds(0, 0, width, height)
+
+    // TODO: create collision terrain
   }
 }
 
