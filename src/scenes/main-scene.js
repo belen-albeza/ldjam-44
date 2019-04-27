@@ -3,6 +3,7 @@ import Phaser from 'phaser'
 import { TSIZE } from '../utils/constants'
 import Character from '../prefabs/character'
 import MeleeAttack from '../prefabs/melee-attack'
+import WalkingEnemy from '../prefabs/walking-enemy'
 
 class MainScene extends Phaser.Scene {
   constructor() {
@@ -25,6 +26,8 @@ class MainScene extends Phaser.Scene {
     // setup the game world
     this._createLevel()
 
+    this.enemy = new WalkingEnemy(this, this.chara.x, this.chara.y + 16)
+
     // make the camera follow the main character
     this.cameras.main.startFollow(this.chara)
   }
@@ -33,6 +36,15 @@ class MainScene extends Phaser.Scene {
     // collision detection
     const layer = this.map.getLayer('main').tilemapLayer
     this.physics.collide(this.chara, layer)
+    if (this.chara.isAttacking) {
+      this.physics.overlap(
+        this.chara.attackSprite,
+        this.enemy,
+        (chara, enemy) => {
+          console.log('OUCH!')
+        }
+      )
+    }
 
     this._updatePlayerInput()
     this.chara.update()
