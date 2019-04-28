@@ -19,6 +19,7 @@ import SFX_CHARA_MELEE from '../assets/audio/chara-melee.wav'
 import SFX_CHARA_HIT from '../assets/audio/chara-hit.wav'
 import SFX_ENEMY_HIT from '../assets/audio/enemy-hit.wav'
 import SFX_GOAL from '../assets/audio/goal.wav'
+import BGM_MAIN_THEME from '../assets/audio/bgm-essence.wav'
 
 class LoaderScene extends Phaser.Scene {
   constructor() {
@@ -73,6 +74,7 @@ class LoaderScene extends Phaser.Scene {
     this.load.audio('sfx:chara:hit', SFX_CHARA_HIT)
     this.load.audio('sfx:enemy:hit', SFX_ENEMY_HIT)
     this.load.audio('sfx:goal', SFX_GOAL)
+    this.load.audio('bgm:main', BGM_MAIN_THEME)
   }
 
   create() {

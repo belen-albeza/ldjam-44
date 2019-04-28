@@ -21,6 +21,10 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
+    if (this._steps.length > 1) {
+      this.bgm = this.sound.add('bgm:main', { loop: true, volume: 0.8 })
+    }
+
     this.keys = this.input.keyboard.addKeys({
       action: Phaser.Input.Keyboard.KeyCodes.Z
     })
@@ -76,6 +80,7 @@ class TitleScene extends Phaser.Scene {
     ) {
       const isTutorialInProgress = this.nextLabel()
       if (!isTutorialInProgress) {
+        if (this.bgm) this.bgm.play()
         this.scene.start('main')
       }
     }

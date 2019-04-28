@@ -22,7 +22,7 @@ class MainScene extends Phaser.Scene {
       attack: Phaser.Input.Keyboard.KeyCodes.Z
     })
 
-    // setup sfx
+    // setup audio
     this.sfx = {
       goal: {
         hit: this.sound.add('sfx:goal')
