@@ -10,6 +10,7 @@ import FNT_RETROFONT from '../assets/images/retrofont.png'
 import IMG_TILESET from '../assets/images/tileset.png'
 import IMG_CHARA from '../assets/images/chara.png'
 import IMG_MELEE from '../assets/images/chara-melee-attack.png'
+import IMG_WALKING_ENEMY from '../assets/images/walking-enemy.png'
 import LVL_01 from '../assets/levels/level_tmp.json'
 
 class LoaderScene extends Phaser.Scene {
@@ -40,6 +41,7 @@ class LoaderScene extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     })
+    this.load.image('img:walking-enemy', IMG_WALKING_ENEMY)
 
     // load levels
     this.load.tilemapTiledJSON('lvl:01', LVL_01)

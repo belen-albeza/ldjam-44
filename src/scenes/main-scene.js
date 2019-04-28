@@ -26,7 +26,12 @@ class MainScene extends Phaser.Scene {
     // setup the game world
     this._createLevel()
 
-    this.enemy = new WalkingEnemy(this, this.chara.x, this.chara.y + 16)
+    this.enemy = new WalkingEnemy(
+      this,
+      this.chara.x + 20,
+      this.chara.y + 16,
+      'UP'
+    )
 
     // make the camera follow the main character
     this.cameras.main.startFollow(this.chara)
@@ -36,6 +41,9 @@ class MainScene extends Phaser.Scene {
     // collision detection
     const layer = this.map.getLayer('main').tilemapLayer
     this.physics.collide(this.chara, layer)
+    this.physics.collide(this.enemy, layer, enemy => {
+      enemy.reverseWalk()
+    })
     if (this.chara.isAttacking) {
       this.physics.overlap(
         this.chara.attackSprite,

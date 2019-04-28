@@ -22,9 +22,9 @@ class MeleeAttack extends Phaser.Physics.Arcade.Sprite {
     scene.anims.create({
       key: 'attack:melee',
       frames: scene.anims.generateFrameNumbers('img:melee', {
-        frames: [0, 1, 2, 3]
+        frames: [0, 1, 2, 2, 3]
       }),
-      frameRate: 14
+      frameRate: 18
     })
   }
 
