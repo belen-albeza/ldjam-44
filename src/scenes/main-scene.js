@@ -20,8 +20,19 @@ class MainScene extends Phaser.Scene {
       attack: Phaser.Input.Keyboard.KeyCodes.Z
     })
 
+    // setup sfx
+    this.sfx = {
+      chara: {
+        melee: this.sound.add('sfx:chara:melee')
+      },
+      enemy: {
+        hit: this.sound.add('sfx:enemy:hit')
+      }
+    }
+
     // setup animations
     MeleeAttack.CreateAnimations(this)
+    WalkingEnemy.CreateAnimations(this)
 
     // setup the game world
     this._createLevel()
@@ -30,8 +41,12 @@ class MainScene extends Phaser.Scene {
       this,
       this.chara.x + 20,
       this.chara.y + 16,
-      'UP'
+      'UP',
+      this.sfx.enemy
     )
+
+    // setup ui
+    this._createUI()
 
     // make the camera follow the main character
     this.cameras.main.startFollow(this.chara)
@@ -49,7 +64,7 @@ class MainScene extends Phaser.Scene {
         this.chara.attackSprite,
         this.enemy,
         (chara, enemy) => {
-          console.log('OUCH!')
+          enemy.receiveHit()
         }
       )
     }
@@ -114,12 +129,18 @@ class MainScene extends Phaser.Scene {
 
       switch (prefab.type) {
         case 'chara':
-          this.chara = new Character(this, x, y)
+          this.chara = new Character(this, x, y, this.sfx.chara)
           break
         default:
           console.warning(`Unknown prefab of type: ${prefab.type}`)
       }
     })
+  }
+
+  _createUI() {
+    this.add
+      .bitmapText(4, 12, 'fnt:retro', 'MOVE: ARROW KEYS  ATTACK: Z')
+      .setOrigin(0, 0)
   }
 
   _drawDebug() {

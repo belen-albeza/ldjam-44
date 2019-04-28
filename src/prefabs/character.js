@@ -4,7 +4,7 @@ import MeleeAttack from './melee-attack'
 const SPEED = 100
 
 class Character extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, sfx) {
     super(scene, x, y, 'img:chara')
 
     scene.add.existing(this)
@@ -16,6 +16,7 @@ class Character extends Phaser.Physics.Arcade.Sprite {
     // enable collision with world boudns
     this.setCollideWorldBounds(true)
 
+    this.sfx = sfx
     this.attackSprite = null
   }
 
@@ -63,6 +64,8 @@ class Character extends Phaser.Physics.Arcade.Sprite {
       offset
     )
     this.attackSprite.once('destroy', () => (this.attackSprite = null))
+
+    this.sfx.melee.play()
 
     return true
   }

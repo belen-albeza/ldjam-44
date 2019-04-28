@@ -12,6 +12,8 @@ import IMG_CHARA from '../assets/images/chara.png'
 import IMG_MELEE from '../assets/images/chara-melee-attack.png'
 import IMG_WALKING_ENEMY from '../assets/images/walking-enemy.png'
 import LVL_01 from '../assets/levels/level_tmp.json'
+import SFX_CHARA_MELEE from '../assets/audio/chara-melee.wav'
+import SFX_ENEMY_HIT from '../assets/audio/enemy-hit.wav'
 
 class LoaderScene extends Phaser.Scene {
   constructor() {
@@ -41,10 +43,17 @@ class LoaderScene extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     })
-    this.load.image('img:walking-enemy', IMG_WALKING_ENEMY)
+    this.load.spritesheet('img:walking-enemy', IMG_WALKING_ENEMY, {
+      frameWidth: 16,
+      frameHeight: 16
+    })
 
     // load levels
     this.load.tilemapTiledJSON('lvl:01', LVL_01)
+
+    // load audio assets
+    this.load.audio('sfx:chara:melee', SFX_CHARA_MELEE)
+    this.load.audio('sfx:enemy:hit', SFX_ENEMY_HIT)
   }
 
   create() {
