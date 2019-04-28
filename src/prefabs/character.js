@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 import MeleeAttack from './melee-attack'
 
 const SPEED = 100
-const MAX_ESSENCE = 1000
+const MAX_ESSENCE = 500
 const ESSENCE_COST = {
   MOVE: -1,
   ATTACK: -20
