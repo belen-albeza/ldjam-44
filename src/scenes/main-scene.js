@@ -5,6 +5,7 @@ import EssenceBar from '../prefabs/essence-bar'
 import Character from '../prefabs/character'
 import MeleeAttack from '../prefabs/melee-attack'
 import WalkingEnemy from '../prefabs/walking-enemy'
+import Goal from '../prefabs/goal'
 
 class MainScene extends Phaser.Scene {
   constructor() {
@@ -23,6 +24,9 @@ class MainScene extends Phaser.Scene {
 
     // setup sfx
     this.sfx = {
+      goal: {
+        hit: this.sound.add('sfx:goal')
+      },
       chara: {
         hit: this.sound.add('sfx:chara:hit'),
         melee: this.sound.add('sfx:chara:melee')
@@ -66,6 +70,11 @@ class MainScene extends Phaser.Scene {
     }
     this.physics.overlap(this.chara, this.walkingEnemies, (chara, enemy) => {
       chara.receiveHit()
+    })
+
+    // check for victory condition
+    this.physics.overlap(this.chara, this.goal, (chara, goal) => {
+      this._victory()
     })
 
     this._updatePlayerInput()
@@ -152,6 +161,9 @@ class MainScene extends Phaser.Scene {
             new WalkingEnemy(this, x, y, direction, this.sfx.enemy)
           )
           break
+        case 'goal':
+          this.goal = new Goal(this, x, y)
+          break
         default:
           console.warn(`Unknown prefab of type: ${prefab.type}`)
       }
@@ -168,6 +180,12 @@ class MainScene extends Phaser.Scene {
 
   _gameOver() {
     this.scene.launch('gameover')
+    this.scene.pause()
+  }
+
+  _victory() {
+    this.sfx.goal.hit.play()
+    this.scene.launch('victory')
     this.scene.pause()
   }
 

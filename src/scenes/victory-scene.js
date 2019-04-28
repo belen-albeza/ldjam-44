@@ -1,9 +1,9 @@
 import Phaser from 'phaser'
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils/constants'
 
-class GameoverScene extends Phaser.Scene {
+class VictoryScene extends Phaser.Scene {
   constructor() {
-    super({ key: 'gameover' })
+    super({ key: 'victory' })
   }
 
   init() {
@@ -26,13 +26,13 @@ class GameoverScene extends Phaser.Scene {
     const container = this.add.container(0, -12)
     container.add(
       this.add
-        .bitmapText(x, 0, 'fnt:retro', '- GAME OVER -')
+        .bitmapText(x, 0, 'fnt:retro', '- WELL DONE -')
         .setOrigin(0.5)
         .setTint(0xff4f78)
     )
     container.add(
       this.add
-        .bitmapText(x, 10, 'fnt:retro', 'PRESS Z TO START AGAIN')
+        .bitmapText(x, 10, 'fnt:retro', 'PRESS Z TO CONTINUE')
         .setOrigin(0.5)
     )
 
@@ -57,4 +57,4 @@ class GameoverScene extends Phaser.Scene {
   }
 }
 
-export default GameoverScene
+export default VictoryScene

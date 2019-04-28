@@ -13,10 +13,12 @@ import IMG_ESSENCE_BAR from '../assets/images/essence-bar.png'
 import IMG_CHARA from '../assets/images/chara.png'
 import IMG_MELEE from '../assets/images/chara-melee-attack.png'
 import IMG_WALKING_ENEMY from '../assets/images/walking-enemy.png'
+import IMG_GOAL from '../assets/images/goal.png'
 import LVL_01 from '../assets/levels/level_tmp.json'
 import SFX_CHARA_MELEE from '../assets/audio/chara-melee.wav'
 import SFX_CHARA_HIT from '../assets/audio/chara-hit.wav'
 import SFX_ENEMY_HIT from '../assets/audio/enemy-hit.wav'
+import SFX_GOAL from '../assets/audio/goal.wav'
 
 class LoaderScene extends Phaser.Scene {
   constructor() {
@@ -42,6 +44,10 @@ class LoaderScene extends Phaser.Scene {
     // load images and spritesheets
     this.load.image('img:tileset', IMG_TILESET)
     this.load.image('img:background', IMG_BACKGROUND)
+    this.load.spritesheet('img:goal', IMG_GOAL, {
+      frameWidth: 16,
+      frameHeight: 16
+    })
     this.load.spritesheet('img:chara', IMG_CHARA, {
       frameWidth: 16,
       frameHeight: 16
@@ -66,6 +72,7 @@ class LoaderScene extends Phaser.Scene {
     this.load.audio('sfx:chara:melee', SFX_CHARA_MELEE)
     this.load.audio('sfx:chara:hit', SFX_CHARA_HIT)
     this.load.audio('sfx:enemy:hit', SFX_ENEMY_HIT)
+    this.load.audio('sfx:goal', SFX_GOAL)
   }
 
   create() {

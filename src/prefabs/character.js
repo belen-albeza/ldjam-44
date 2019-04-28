@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 import MeleeAttack from './melee-attack'
 
 const SPEED = 100
-const MAX_ESSENCE = 100
+const MAX_ESSENCE = 1000
 const ESSENCE_COST = {
   MOVE: -1,
   ATTACK: -20
@@ -14,6 +14,7 @@ class Character extends Phaser.Physics.Arcade.Sprite {
 
     scene.add.existing(this)
     scene.physics.add.existing(this)
+    this.setDepth(1)
 
     // make the physical body (not the sprite image itself!) smaller
     this.setSize(8, 8)
