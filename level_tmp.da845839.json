@@ -120,6 +120,72 @@
                  "width":16,
                  "x":176,
                  "y":240
+                }, 
+                {
+                 "gid":11,
+                 "height":16,
+                 "id":16,
+                 "name":"",
+                 "rotation":0,
+                 "type":"goal",
+                 "visible":true,
+                 "width":16,
+                 "x":80,
+                 "y":80
+                }, 
+                {
+                 "gid":10,
+                 "height":16,
+                 "id":17,
+                 "name":"right",
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
+                 "rotation":0,
+                 "type":"walking-enemy",
+                 "visible":true,
+                 "width":16,
+                 "x":320,
+                 "y":192
+                }, 
+                {
+                 "gid":10,
+                 "height":16,
+                 "id":18,
+                 "name":"left",
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"left"
+                        }],
+                 "rotation":0,
+                 "type":"walking-enemy",
+                 "visible":true,
+                 "width":16,
+                 "x":336,
+                 "y":48
+                }, 
+                {
+                 "gid":10,
+                 "height":16,
+                 "id":19,
+                 "name":"left",
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"left"
+                        }],
+                 "rotation":0,
+                 "type":"walking-enemy",
+                 "visible":true,
+                 "width":16,
+                 "x":288,
+                 "y":144
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -128,7 +194,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":14,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
@@ -191,6 +257,10 @@
                          "value":"right"
                         }],
                  "type":"walking-enemy"
+                }, 
+                {
+                 "id":2,
+                 "type":"goal"
                 }],
          "tilewidth":16
         }],
