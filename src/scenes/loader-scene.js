@@ -8,6 +8,7 @@ import FNT_RETROFONT from '../assets/images/retrofont.png'
 
 // asset paths for the game
 import IMG_TILESET from '../assets/images/tileset.png'
+import IMG_ESSENCE_BAR from '../assets/images/essence-bar.png'
 import IMG_CHARA from '../assets/images/chara.png'
 import IMG_MELEE from '../assets/images/chara-melee-attack.png'
 import IMG_WALKING_ENEMY from '../assets/images/walking-enemy.png'
@@ -39,6 +40,10 @@ class LoaderScene extends Phaser.Scene {
     // load images and spritesheets
     this.load.image('img:tileset', IMG_TILESET)
     this.load.image('img:chara', IMG_CHARA)
+    this.load.spritesheet('img:essence-bar', IMG_ESSENCE_BAR, {
+      frameWidth: 128,
+      frameHeight: 3
+    })
     this.load.spritesheet('img:melee', IMG_MELEE, {
       frameWidth: 16,
       frameHeight: 16

@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 
 import { TSIZE } from '../utils/constants'
+import EssenceBar from '../prefabs/essence-bar'
 import Character from '../prefabs/character'
 import MeleeAttack from '../prefabs/melee-attack'
 import WalkingEnemy from '../prefabs/walking-enemy'
@@ -33,6 +34,7 @@ class MainScene extends Phaser.Scene {
     // setup animations
     MeleeAttack.CreateAnimations(this)
     WalkingEnemy.CreateAnimations(this)
+    EssenceBar.CreateAnimations(this)
 
     // setup the game world
     this._createLevel()
@@ -63,6 +65,8 @@ class MainScene extends Phaser.Scene {
 
     this._updatePlayerInput()
     this.chara.update()
+    this.essenceBar.setValue(this.chara.normalizedEssence)
+    this.essenceBar.update()
   }
 
   _updatePlayerInput() {
@@ -145,9 +149,10 @@ class MainScene extends Phaser.Scene {
   }
 
   _createUI() {
-    this.add
-      .bitmapText(4, 12, 'fnt:retro', 'MOVE: ARROW KEYS  ATTACK: Z')
-      .setOrigin(0, 0)
+    // this.add
+    //   .bitmapText(4, 12, 'fnt:retro', 'MOVE: ARROW KEYS  ATTACK: Z')
+    //   .setOrigin(0, 0)
+    this.essenceBar = new EssenceBar(this, 2, 2, 0.5).setScrollFactor(0)
   }
 
   _drawDebug() {
