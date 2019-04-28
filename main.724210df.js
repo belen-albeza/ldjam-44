@@ -2642,7 +2642,7 @@ module.exports="/ldjam-44/walking-enemy.d2021e95.png";
 },{}],"UZb6":[function(require,module,exports) {
 module.exports="/ldjam-44/goal.79cdeca6.png";
 },{}],"6XgV":[function(require,module,exports) {
-module.exports="/ldjam-44/level_tmp.da845839.json";
+module.exports="/ldjam-44/level_tmp.9b37e0ae.json";
 },{}],"7Ilg":[function(require,module,exports) {
 module.exports="/ldjam-44/chara-melee.ff65aefd.wav";
 },{}],"Suvl":[function(require,module,exports) {
