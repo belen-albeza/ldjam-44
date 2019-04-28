@@ -52,7 +52,8 @@ class VictoryScene extends Phaser.Scene {
       this._shouldlistenToKeyboard &&
       Phaser.Input.Keyboard.JustDown(this.keys.action)
     ) {
-      this.scene.start('main')
+      this.scene.stop('main')
+      this.scene.start('title', { shallSkipTutorial: true })
     }
   }
 }

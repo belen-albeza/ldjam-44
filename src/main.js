@@ -1,10 +1,11 @@
 import Phaser from 'phaser'
 
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from './utils/constants'
+import LoaderScene from './scenes/loader-scene'
+import TitleScene from './scenes/title-scene'
 import MainScene from './scenes/main-scene'
 import GameoverScene from './scenes/gameover-scene'
 import VictoryScene from './scenes/victory-scene'
-import LoaderScene from './scenes/loader-scene'
 
 const config = {
   type: Phaser.AUTO,
@@ -29,7 +30,7 @@ const config = {
       // debugShowStaticBody: true
     }
   },
-  scene: [LoaderScene, MainScene, GameoverScene, VictoryScene]
+  scene: [LoaderScene, MainScene, GameoverScene, VictoryScene, TitleScene]
 }
 
 window.onload = () => {

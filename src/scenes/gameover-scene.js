@@ -10,7 +10,8 @@ class GameoverScene extends Phaser.Scene {
     this._shouldlistenToKeyboard = false
   }
 
-  create() {
+  create(data = {}) {
+    const title = data.title || 'GAME OVER'
     this.keys = this.input.keyboard.addKeys({
       action: Phaser.Input.Keyboard.KeyCodes.Z
     })
@@ -26,7 +27,7 @@ class GameoverScene extends Phaser.Scene {
     const container = this.add.container(0, -12)
     container.add(
       this.add
-        .bitmapText(x, 0, 'fnt:retro', '- GAME OVER -')
+        .bitmapText(x, 0, 'fnt:retro', title)
         .setOrigin(0.5)
         .setTint(0xff4f78)
     )

@@ -77,7 +77,7 @@ class LoaderScene extends Phaser.Scene {
 
   create() {
     // loading has finished -> start game
-    this.scene.start('main')
+    this.scene.start('title')
   }
 
   _addBitmapFont() {

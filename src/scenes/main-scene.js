@@ -84,7 +84,7 @@ class MainScene extends Phaser.Scene {
 
     // check for game over condition
     if (!this.chara.hasEssenceLeft) {
-      this._gameOver()
+      this._gameOver(this.chara.isAlive ? 'YOU RAN OUT OF ESSENCE' : 'YOU DIED')
     }
   }
 
@@ -171,15 +171,11 @@ class MainScene extends Phaser.Scene {
   }
 
   _createUI() {
-    this.add
-      .bitmapText(4, 127, 'fnt:retro', 'MOVE: ARROW KEYS  ATTACK: Z')
-      .setOrigin(0, 1)
-      .setScrollFactor(0)
     this.essenceBar = new EssenceBar(this, 2, 2, 0.5).setScrollFactor(0)
   }
 
-  _gameOver() {
-    this.scene.launch('gameover')
+  _gameOver(reason) {
+    this.scene.launch('gameover', { title: reason })
     this.scene.pause()
   }
 
