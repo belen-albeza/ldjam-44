@@ -4,8 +4,8 @@ export const SCREEN_HEIGHT = 128
 export const TSIZE = 16
 
 export const DIRECTION = {
-  UP: 'UP',
-  DOWN: 'DOWN',
-  LEFT: 'LEFT',
-  RIGHT: 'RIGHT'
+  UP: 'up',
+  DOWN: 'down',
+  LEFT: 'left',
+  RIGHT: 'right'
 }

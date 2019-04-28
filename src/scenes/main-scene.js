@@ -37,14 +37,6 @@ class MainScene extends Phaser.Scene {
     // setup the game world
     this._createLevel()
 
-    this.enemy = new WalkingEnemy(
-      this,
-      this.chara.x + 20,
-      this.chara.y + 16,
-      'UP',
-      this.sfx.enemy
-    )
-
     // setup ui
     this._createUI()
 
@@ -56,13 +48,13 @@ class MainScene extends Phaser.Scene {
     // collision detection
     const layer = this.map.getLayer('main').tilemapLayer
     this.physics.collide(this.chara, layer)
-    this.physics.collide(this.enemy, layer, enemy => {
+    this.physics.collide(this.walkingEnemies, layer, enemy => {
       enemy.reverseWalk()
     })
     if (this.chara.isAttacking) {
       this.physics.overlap(
         this.chara.attackSprite,
-        this.enemy,
+        this.walkingEnemies,
         (chara, enemy) => {
           enemy.receiveHit()
         }
@@ -118,21 +110,36 @@ class MainScene extends Phaser.Scene {
   }
 
   _createPrefabs(prefabs) {
+    const _getPropertyValue = (prefab, property) => {
+      if (!prefab.properties) return null
+
+      const raw = prefab.properties.find(x => x.name === property)
+      return raw ? raw.value : null
+    }
+
     // objects from tiled use bottom-left corner as the origin of coordinates,
     // so we need to account for that
     const offsetX = TSIZE / 2
     const offsetY = -TSIZE / 2
 
+    this.walkingEnemies = this.add.group()
+
     prefabs.forEach(prefab => {
       const x = prefab.x + offsetX
       const y = prefab.y + offsetY
+      const direction = _getPropertyValue(prefab, 'direction')
 
       switch (prefab.type) {
         case 'chara':
           this.chara = new Character(this, x, y, this.sfx.chara)
           break
+        case 'walking-enemy':
+          this.walkingEnemies.add(
+            new WalkingEnemy(this, x, y, direction, this.sfx.enemy)
+          )
+          break
         default:
-          console.warning(`Unknown prefab of type: ${prefab.type}`)
+          console.warn(`Unknown prefab of type: ${prefab.type}`)
       }
     })
   }

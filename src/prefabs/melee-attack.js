@@ -39,14 +39,16 @@ class MeleeAttack extends Phaser.Physics.Arcade.Sprite {
     const isVertical = angle === 0 || Math.abs(angle) === 180
     let offsetX = 0
     let offsetY = 0
-    let width = 16
-    let height = 16
+    let width = 12
+    let height = 12
 
     if (isVertical) {
       width = 8
       offsetX = angle === 0 ? 8 : 0
+      offsetY = 2
     } else {
       height = 8
+      offsetX = 2
       offsetY = angle === 90 ? 8 : 0
     }
 

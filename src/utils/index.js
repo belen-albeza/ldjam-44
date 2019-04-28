@@ -16,5 +16,5 @@ export function getOppositeDirection(direction) {
 }
 
 export function getVectorFromDirection(direction) {
-  return Phaser.Math.Vector2[direction]
+  return Phaser.Math.Vector2[direction.toUpperCase()]
 }
