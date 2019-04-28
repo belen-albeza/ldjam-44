@@ -24,6 +24,7 @@ class MainScene extends Phaser.Scene {
     // setup sfx
     this.sfx = {
       chara: {
+        hit: this.sound.add('sfx:chara:hit'),
         melee: this.sound.add('sfx:chara:melee')
       },
       enemy: {
@@ -32,6 +33,7 @@ class MainScene extends Phaser.Scene {
     }
 
     // setup animations
+    Character.CreateAnimations(this)
     MeleeAttack.CreateAnimations(this)
     WalkingEnemy.CreateAnimations(this)
     EssenceBar.CreateAnimations(this)
@@ -62,11 +64,19 @@ class MainScene extends Phaser.Scene {
         }
       )
     }
+    this.physics.overlap(this.chara, this.walkingEnemies, (chara, enemy) => {
+      chara.receiveHit()
+    })
 
     this._updatePlayerInput()
     this.chara.update()
     this.essenceBar.setValue(this.chara.normalizedEssence)
     this.essenceBar.update()
+
+    // check for game over condition
+    if (!this.chara.hasEssenceLeft) {
+      this._gameOver()
+    }
   }
 
   _updatePlayerInput() {
@@ -149,10 +159,16 @@ class MainScene extends Phaser.Scene {
   }
 
   _createUI() {
-    // this.add
-    //   .bitmapText(4, 12, 'fnt:retro', 'MOVE: ARROW KEYS  ATTACK: Z')
-    //   .setOrigin(0, 0)
+    this.add
+      .bitmapText(4, 127, 'fnt:retro', 'MOVE: ARROW KEYS  ATTACK: Z')
+      .setOrigin(0, 1)
+      .setScrollFactor(0)
     this.essenceBar = new EssenceBar(this, 2, 2, 0.5).setScrollFactor(0)
+  }
+
+  _gameOver() {
+    this.scene.launch('gameover')
+    this.scene.pause()
   }
 
   _drawDebug() {

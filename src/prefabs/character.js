@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 import MeleeAttack from './melee-attack'
 
 const SPEED = 100
-const MAX_ESSENCE = 1000
+const MAX_ESSENCE = 100
 const ESSENCE_COST = {
   MOVE: -1,
   ATTACK: -20
@@ -25,6 +25,28 @@ class Character extends Phaser.Physics.Arcade.Sprite {
     this.attackSprite = null
 
     this.essencePoints = MAX_ESSENCE
+    this.isAlive = true
+
+    this.play('chara:walk')
+  }
+
+  static CreateAnimations(scene) {
+    scene.anims.create({
+      key: 'chara:walk',
+      frames: scene.anims.generateFrameNumbers('img:chara', {
+        frames: [0]
+      }),
+      frameRate: 1,
+      repeat: -1
+    })
+    scene.anims.create({
+      key: 'chara:hit',
+      frames: scene.anims.generateFrameNumbers('img:chara', {
+        frames: [0, 1]
+      }),
+      frameRate: 16,
+      repeat: 3
+    })
   }
 
   get isAttacking() {
@@ -96,6 +118,21 @@ class Character extends Phaser.Physics.Arcade.Sprite {
       Math.max(0, this.essencePoints + delta),
       MAX_ESSENCE
     )
+  }
+
+  receiveHit() {
+    // avoid getting hit once dead
+    if (!this.isAlive) return false
+
+    // mark this sprite as dead & disable physics
+    this.isAlive = false
+    this.body.setEnable(false)
+
+    this.sfx.hit.play()
+    this.play('chara:hit')
+    this.once('animationcomplete-chara:hit', () => {
+      this.essencePoints = 0
+    })
   }
 }
 

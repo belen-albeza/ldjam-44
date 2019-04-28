@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from './utils/constants'
 import MainScene from './scenes/main-scene'
+import GameoverScene from './scenes/gameover-scene'
 import LoaderScene from './scenes/loader-scene'
 
 const config = {
@@ -27,7 +28,7 @@ const config = {
       // debugShowStaticBody: true
     }
   },
-  scene: [LoaderScene, MainScene]
+  scene: [LoaderScene, MainScene, GameoverScene]
 }
 
 window.onload = () => {
